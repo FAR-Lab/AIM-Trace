@@ -1537,7 +1537,13 @@ public abstract class BasicVehicle implements VehicleSimView {
 
     // Code to print the data
     if (vin >= 0) {
-      aim4.Main.csvPrintStream.printf("DATA,%f,%d,%s,%f,%f,%f,%f\n", currentTime, vin, getSpec().getName(), getCenterPoint().getX(), getCenterPoint().getY(), getHeading(), getSteeringAngle());
+      double steeringAngle = 0;
+      try {
+        steeringAngle = getSteeringAngle();
+      } catch (UnsupportedOperationException e) {
+        // do nothing?
+      }
+      aim4.Main.csvPrintStream.printf("DATA,%f,%d,%s,%f,%f,%f,%f\n", currentTime, vin, getSpec().getName(), getCenterPoint().getX(), getCenterPoint().getY(), getHeading(), steeringAngle);
     }
   }
 
